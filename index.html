@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Chat App</title>
+</head>
+<body style="text-align:center; font-family:Arial; margin-top:50px;">
+
+<h2>AI Chat App 🤖</h2>
+
+<input type="text" id="input" placeholder="Ask something...">
+<button onclick="reply()">Ask</button>
+
+<p id="output"></p>
+
+<script>
+function reply(){
+  let input = document.getElementById("input").value.toLowerCase();
+  let output="";
+
+  if(input.includes("hello")) output="Hi 👋";
+  else if(input.includes("name")) output="I am your AI 🤖";
+  else if(input.includes("cloud")) output="Cloud = internet services ☁️";
+  else output="I am learning 😅";
+
+  document.getElementById("output").innerText=output;
+}
+</script>
+
+</body>
+</html>
