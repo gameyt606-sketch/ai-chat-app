@@ -1,28 +1,111 @@
 <!DOCTYPE html>
 <html>
+<!DOCTYPE html>
+<html>
 <head>
   <title>AI Chat App</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 400px;
+      background: #1e293b;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .messages {
+      height: 300px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+
+    .msg {
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 8px;
+      max-width: 80%;
+    }
+
+    .user {
+      background: #3b82f6;
+      margin-left: auto;
+    }
+
+    .bot {
+      background: #475569;
+    }
+
+    .input-area {
+      display: flex;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      padding: 10px;
+      background: #22c55e;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body style="text-align:center; font-family:Arial; margin-top:50px;">
 
-<h2>AI Chat App 🤖</h2>
+<body>
 
-<input type="text" id="input" placeholder="Ask something...">
-<button onclick="reply()">Ask</button>
+<div class="chat-container">
+  <h2>🤖 AI Chat</h2>
 
-<p id="output"></p>
+  <div class="messages" id="messages"></div>
+
+  <div class="input-area">
+    <input type="text" id="input" placeholder="Type message...">
+    <button onclick="send()">Send</button>
+  </div>
+</div>
 
 <script>
-function reply(){
-  let input = document.getElementById("input").value.toLowerCase();
-  let output="";
+function send(){
+  let input = document.getElementById("input").value;
+  if(input === "") return;
 
-  if(input.includes("hello")) output="Hi 👋";
-  else if(input.includes("name")) output="I am your AI 🤖";
-  else if(input.includes("cloud")) output="Cloud = internet services ☁️";
-  else output="I am learning 😅";
+  addMessage(input, "user");
 
-  document.getElementById("output").innerText=output;
+  let reply = getReply(input.toLowerCase());
+  setTimeout(() => addMessage(reply, "bot"), 500);
+
+  document.getElementById("input").value="";
+}
+
+function addMessage(text, type){
+  let div = document.createElement("div");
+  div.className = "msg " + type;
+  div.innerText = text;
+
+  document.getElementById("messages").appendChild(div);
+}
+
+function getReply(input){
+  if(input.includes("hello")) return "Hi 👋 How can I help you?";
+  if(input.includes("name")) return "I am your AI assistant 🤖";
+  if(input.includes("cloud")) return "Cloud computing = services over internet ☁️";
+  return "Interesting 🤔 tell me more...";
 }
 </script>
 
